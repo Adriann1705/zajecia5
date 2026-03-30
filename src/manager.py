@@ -23,3 +23,11 @@ class Manager:
             if tenant.apartment not in self.apartments:
                 return False
         return True
+    
+    def get_apartment_costs(self, apartment_key, year, month):
+        if apartment_key not in self.apartments:
+            return None
+        
+        cost = sum(bill.amount_pln for bill in self.bills
+                   if bill.apartment == apartment_key and bill.settlement_year == year and bill.settlement_month == month)
+        return float(cost)
